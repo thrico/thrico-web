@@ -21,7 +21,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "16" # Use the specific version of Node.js for your project
+          node-version: "20" # Use the specific version of Node.js for your project
 
       # Step 3: Install dependencies for /web-app
       - name: Install dependencies
