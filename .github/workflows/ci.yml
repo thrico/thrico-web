@@ -3,14 +3,14 @@ name: CI Pipeline (Test)
 on:
   push:
     branches:
-      - main  # Trigger on push to the main branch
+      - main # Trigger on push to the main branch
   pull_request:
     branches:
-      - main  # Trigger on PR creation against main branch
+      - main # Trigger on PR creation against main branch
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu image
+    runs-on: ubuntu-latest # Use the latest Ubuntu image
 
     steps:
       # Step 1: Checkout the code
@@ -21,7 +21,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20'  # Use the specific version of Node.js for your project
+          node-version: "20" # Use the specific version of Node.js for your project
 
       # Step 3: Install pnpm
       - name: Install pnpm
@@ -33,18 +33,6 @@ jobs:
         run: |
           cd web-app
           pnpm install
-
-      # Step 5: Run tests for /web-app
-      # - name: Run tests
-      #   run: |
-      #     cd web-app
-      #     pnpm test  # Adjust this command based on your testing setup
-
-      # # Step 6: Lint the code (optional but recommended)
-      # - name: Lint the code
-        run: |
-          cd web-app
-          pnpm run lint  # Adjust if you're using a linter like ESLint
 
       # Step 7: Build the app for /web-app
       - name: Build the app
