@@ -39,3 +39,14 @@ jobs:
           docker tag web-app-thrico-web:latest ${{ secrets.DOCKERHUB_USERNAME }}/web-app-thrico-web:latest
       - name: Push Docker image to Docker Hub
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/web-app-thrico-web:latest
+
+      - name: Deploy to Droplet via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.DROPLET_IP }}
+          username: root
+          key: ${{ secrets.DROPLET_SSH_KEY }}
+          script: |
+            cd /root/deploy
+            docker-compose pull
+            docker-compose up -d
