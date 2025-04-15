@@ -31,6 +31,9 @@ jobs:
         run: |
           npm install
           docker-compose build thrico-web
+      - name: List Docker images (for debug)
+        run: docker images
+
       - name: Tag the image for Docker Hub
         run: |
           docker tag web-app_thrico-web:latest ${{ secrets.DOCKERHUB_USERNAME }}/web-app_thrico-web:latest
