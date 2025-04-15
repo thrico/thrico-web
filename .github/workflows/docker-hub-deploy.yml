@@ -36,6 +36,6 @@ jobs:
 
       - name: Tag the image for Docker Hub
         run: |
-          docker tag web-app-thrico-web:latest ${{ secrets.DOCKERHUB_USERNAME }}/web-app_thrico-web:latest
+          docker tag web-app-thrico-web:latest ${{ secrets.DOCKERHUB_USERNAME }}/web-app-thrico-web:latest
       - name: Push Docker image to Docker Hub
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/web-app-thrico-web:latest
