@@ -24,7 +24,7 @@ jobs:
         working-directory: ./web-app
         run: |
           npm install
-          npm run docker-compose build thrico-web
+          docker-compose build thrico-web
 
       - name: Push Docker image to Docker Hub
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/web-app_thrico-web:latest
