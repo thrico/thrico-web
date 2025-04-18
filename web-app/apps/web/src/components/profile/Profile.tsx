@@ -13,7 +13,6 @@ import {
 } from "antd";
 import {
   EditOutlined,
-
   UserOutlined,
   LinkedinOutlined,
   InstagramOutlined,
@@ -29,7 +28,7 @@ import { getProfileInfo } from "@/graphql/actions/profile";
 import ProfileImage from "./cover/ProfileImage";
 import Paragraph from "antd/lib/typography/Paragraph";
 import Education from "./education/Education";
-import Experience from "./experience/Experience";
+// import Experience from "./experience/Experience";
 
 const { Title, Text, Link } = Typography;
 
@@ -133,7 +132,6 @@ export default function ProfilePage() {
         <Education education={education} />
 
         <Experience experience={experience} />
-
       </Col>
 
       <Col span={8}>
@@ -183,9 +181,6 @@ export default function ProfilePage() {
           </Card>
         </Space>
       </Col>
-
-
-
     </Row>
   );
 }
