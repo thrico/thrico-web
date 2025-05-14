@@ -44,18 +44,18 @@ jobs:
         working-directory: ./web-app
         run: |
           pnpm install --frozen-lockfile
-          docker-compose build thrico-web
+          docker-compose build thrico-web-dashboard
           docker-compose build thrico-web-login
       - name: List Docker images (for debug)
         run: docker images
 
       - name: Tag the image for Docker Hub
         run: |
-          docker tag web-app-thrico-web:latest ${{ secrets.DOCKERHUB_USERNAME }}/web-app-thrico-web:latest
+          docker tag thrico-web-dashboard:latest ${{ secrets.DOCKERHUB_USERNAME }}/thrico-web-dashboard:latest
           docker tag thrico-web-login:latest ${{ secrets.DOCKERHUB_USERNAME }}/thrico-web-login:latest
       - name: Push Docker image to Docker Hub
         run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/web-app-thrico-web:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/thrico-web:latest
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/thrico-web-login:latest
       # - name: Deploy to Droplet via SSH
       #   uses: appleboy/ssh-action@v1.0.0

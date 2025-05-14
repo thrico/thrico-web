@@ -1,6 +1,6 @@
 services:
-  thrico-web:
-    container_name: thrico-web
+  thrico-web-dashboard:
+    container_name: thrico-web-dashboard
     build:
       context: .
       dockerfile: ./docker/prod/Dockerfile-web
