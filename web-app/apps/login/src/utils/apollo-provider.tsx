@@ -28,7 +28,7 @@ function makeClient() {
   });
 
   const uploadLink = createUploadLink({
-    uri: "http://localhost:3333/",
+    uri: process.env.NEXT_PUBLIC_LOGIN_API_URL,
   });
 
   const link = errorControl.concat(uploadLink);
