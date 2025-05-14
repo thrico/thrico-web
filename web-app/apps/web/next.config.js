@@ -7,6 +7,14 @@ const nextConfig = {
     typescript: {
         ignoreBuildErrors: true,
     },
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'cdn.thrico.network',
+            },
+        ],
+    },
 };
 
 export default nextConfig;
