@@ -1,5 +1,5 @@
 services:
-  thrico-web-web:
+  thrico-web:
     container_name: thrico-web
     build:
       context: .
@@ -10,7 +10,7 @@ services:
     networks:
       - web
   thrico-web-login:
-    container_name: thrico-login
+    container_name: thrico-web-login
     build:
       context: .
       dockerfile: ./docker/prod/Dockerfile-login
