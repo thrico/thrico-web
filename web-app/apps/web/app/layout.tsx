@@ -43,7 +43,6 @@ export default async function RootLayout({
                 }}
               >
                 {children}
-                <pre>{JSON.stringify(process.env, null, 2)}</pre>
               </ConfigProvider>
             </AntdRegistry>
           </body>
@@ -78,7 +77,6 @@ export default async function RootLayout({
                 subTitle="Sorry, you are not authorized to access this page."
                 extra={<Button type="primary">Back Home</Button>}
               />
-              <pre>{JSON.stringify(process.env, null, 2)}</pre>
             </ConfigProvider>
           </AntdRegistry>
         </body>
