@@ -17,7 +17,7 @@ const LoginButton = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <Link href={`${process.env.NEXT_PUBLIC_LOGIN_URL}/auth?token=${token}`}>
-      {children}
+      {process.env.NEXT_PUBLIC_LOGIN_URL} {children}
     </Link>
   );
 };
