@@ -55,7 +55,7 @@ jobs:
           docker tag thrico-web-login:latest ${{ secrets.DOCKERHUB_USERNAME }}/thrico-web-login:latest
       - name: Push Docker image to Docker Hub
         run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/thrico-web:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/thrico-web-dashboard:latest
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/thrico-web-login:latest
       # - name: Deploy to Droplet via SSH
       #   uses: appleboy/ssh-action@v1.0.0

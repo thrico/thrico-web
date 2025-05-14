@@ -1,6 +1,7 @@
 services:
   thrico-web-dashboard:
     container_name: thrico-web-dashboard
+    image: thrico-web-dashboard
     build:
       context: .
       dockerfile: ./docker/prod/Dockerfile-web
@@ -11,6 +12,7 @@ services:
       - web
   thrico-web-login:
     container_name: thrico-web-login
+    image: thrico-web-login
     build:
       context: .
       dockerfile: ./docker/prod/Dockerfile-login
