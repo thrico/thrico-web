@@ -43,6 +43,7 @@ export default async function RootLayout({
                 }}
               >
                 {children}
+                {process.env.}
               </ConfigProvider>
             </AntdRegistry>
           </body>
@@ -54,7 +55,7 @@ export default async function RootLayout({
     // Optionally render fallback content or styling if `getData` fails
     return (
       <html lang="en">
-        {process.env.NEXT_PUBLIC_API_URL}
+        <pre>{JSON.stringify(process.env, null, 2)}</pre>
         <body className={workSans.className}>
           <AntdRegistry>
             <ConfigProvider
