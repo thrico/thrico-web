@@ -1,9 +1,8 @@
 "use client";
 
 import toast from "react-hot-toast";
-import { ApolloLink, HttpLink, createHttpLink } from "@apollo/client";
+import { ApolloLink } from "@apollo/client";
 import {
-  registerApolloClient,
   ApolloClient,
   InMemoryCache,
   ApolloNextAppProvider,
@@ -15,12 +14,10 @@ function makeClient() {
     if (graphQLErrors) {
       graphQLErrors.map(({ message, extensions }) => {
         console.log(extensions);
-        {
-          extensions &&
-            extensions.code !== 403 &&
-            toast.error(message, {
-              id: message,
-            });
+        if (extensions && extensions.code !== 403) {
+          toast.error(message, {
+            id: message,
+          });
         }
       });
     }

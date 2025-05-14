@@ -1,6 +1,6 @@
 import "antd/dist/reset.css";
 import CommonLayout from "@/Layout/CommonLayout";
-
+import "react-horizontal-scrolling-menu/dist/styles.css";
 import getData from "../server/get-details";
 import { Suspense } from "react";
 import { Metadata } from "next";

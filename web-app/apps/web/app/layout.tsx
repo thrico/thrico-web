@@ -15,11 +15,10 @@ export default async function RootLayout({
   try {
     // Fetch data and handle potential errors within RootLayout
     const data = await getData();
-    console.log(data.theme);
+
     return (
       <html lang="en">
         <ApolloWrapper>
-          {process.env.NEXT_PUBLIC_API_URL}
           <body className={workSans.className}>
             <AntdRegistry>
               <ConfigProvider

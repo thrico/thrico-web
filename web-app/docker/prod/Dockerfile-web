@@ -15,7 +15,7 @@ FROM base AS installer
 WORKDIR /app
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
-COPY .gitignore .gitignore
+
 RUN pnpm install --frozen-lockfile
 
 # 4️⃣ Build stage
