@@ -18,13 +18,13 @@ export default function withAuth(WrappedComponent: React.ComponentType) {
     const { data: { getUser } = {}, loading, error } = useGetUser();
 
     const isClient = typeof window !== "undefined";
-    const LOGIN_URL = process.env.NEXT_PUBLIC_LOGIN_URL;
+    // const LOGIN_URL = process.env.NEXT_PUBLIC_LOGIN_URL ? ;
     const BASE_URL = `https://www.thrico.com/`;
 
     if (error || (!loading && !getUser && isClient)) {
       return (
         <Redirect
-          to={`${LOGIN_URL}/login?token=${token}&pathname=${typeof urlParams === "object" ? urlParams?.currentUrl : ""}`}
+          to={`/login?token=${token}&pathname=${typeof urlParams === "object" ? urlParams?.currentUrl : ""}`}
         />
       );
     }
