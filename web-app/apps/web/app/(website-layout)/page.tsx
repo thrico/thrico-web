@@ -1,9 +1,9 @@
-import React from 'react'
+"use client";
+import BalancedLayout from "@/components/website/Website";
+import React from "react";
 
 const page = () => {
-  return (
-    <div>page</div>
-  )
-}
+  return <BalancedLayout />;
+};
 
-export default page
+export default page;

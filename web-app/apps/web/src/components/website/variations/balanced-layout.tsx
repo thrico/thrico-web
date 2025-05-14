@@ -1,12 +1,12 @@
 import { Typography } from "antd";
-import HeroCarousel from "./sections/hero-carousel";
-import EventsList from "./sections/events-list";
-import MembersCarousel from "./sections/members-carousel";
-import Testimonials from "./sections/testimonials";
-import Gallery from "./sections/gallery";
-import NewsRoom from "./sections/news-room";
-import JobsListing from "./sections/jobs-listing";
-import GroupsGrid from "./sections/groups-grid";
+import HeroCarousel from "../sections/hero-carousel";
+import EventsList from "../sections/events-list";
+import GroupsGrid from "../sections/groups-grid";
+import MembersCarousel from "../sections/members-carousel";
+import Testimonials from "../sections/testimonials";
+import Gallery from "../sections/gallery";
+import NewsRoom from "../sections/news-room";
+import JobsListing from "../sections/jobs-listing";
 
 const { Title } = Typography;
 
