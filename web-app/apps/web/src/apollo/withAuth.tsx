@@ -31,7 +31,6 @@ export default (WrappedComponent: any, options = { ssr: false }) => {
               description="Your profile is currently under review. You will gain access to all features once it is approved by the admin."
               type="info"
               banner
-
             />
           </Space>
           <ProfilePage />

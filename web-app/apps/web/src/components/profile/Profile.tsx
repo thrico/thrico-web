@@ -28,6 +28,7 @@ import { getProfileInfo } from "@/graphql/actions/profile";
 import ProfileImage from "./cover/ProfileImage";
 import Paragraph from "antd/lib/typography/Paragraph";
 import Education from "./education/Education";
+import Experience from "./Experience/Experience";
 // import Experience from "./experience/Experience";
 
 const { Title, Text, Link } = Typography;
@@ -128,10 +129,8 @@ export default function ProfilePage() {
             </div>
           </Card>
         </Space>
-
-        <Education education={education} />
-
-        <Experience experience={experience} />
+        {education && <Education education={education} />}
+        {experience && <Experience experience={experience} />}
       </Col>
 
       <Col span={8}>
