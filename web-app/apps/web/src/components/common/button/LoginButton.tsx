@@ -16,7 +16,9 @@ const LoginButton = ({ children }: { children: React.ReactNode }) => {
   });
 
   return (
-    <Link href={`${process.env.NEXT_PUBLIC_LOGIN_URL}/auth?token=${token}`}>
+    <Link
+      href={`${process.env.NEXT_PUBLIC_LOGIN_URL ? process.env.NEXT_PUBLIC_LOGIN_URL : "https://accounts.thrico.network"}/auth?token=${token}`}
+    >
       {process.env.NEXT_PUBLIC_LOGIN_URL} {children}
     </Link>
   );
