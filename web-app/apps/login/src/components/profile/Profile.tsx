@@ -1,18 +1,15 @@
 import React from "react";
 import { Flex, Steps } from "antd";
 
-
 import UserProfile from "./UserProfile/UserProfile";
 import Experience from "./experience/Experience";
 import About from "./About/About";
 import { createProfile, useGetUser } from "../../graphql/actions";
 import Education from "./education/Education";
 import { GetUserType, ProfileStore } from "@/lib/types";
-import { create } from "zustand"
+import { create } from "zustand";
 
 import { SkillForm } from "./Interests";
-
-
 
 const useProfileStore = create<ProfileStore>((set) => ({
   current: 0,
@@ -29,10 +26,9 @@ const useProfileStore = create<ProfileStore>((set) => ({
     headline: "",
     gender: "",
     pronouns: "",
-    location: null
+    location: null,
   },
   about: {
-
     social: [],
   },
   experience: [],
@@ -63,11 +59,10 @@ const Profile = ({ getUser }: { getUser: GetUserType }) => {
     setExperience,
     setEducation,
     setSkills,
-    setCategories
-
+    setCategories,
   } = useProfileStore();
 
-  console.log(profile)
+  console.log(profile);
 
   const [create, { loading }] = createProfile({
     async onCompleted() {
@@ -76,12 +71,7 @@ const Profile = ({ getUser }: { getUser: GetUserType }) => {
   });
   const { refetch } = useGetUser();
 
-
-
-
   const submit = async () => {
-
-
     await create({
       variables: {
         input: {
@@ -95,7 +85,6 @@ const Profile = ({ getUser }: { getUser: GetUserType }) => {
       },
     });
   };
-
 
   return (
     <>
@@ -119,7 +108,6 @@ const Profile = ({ getUser }: { getUser: GetUserType }) => {
                 profile={profile}
                 setCurrent={setCurrent}
                 getUser={getUser}
-
               />
             )}
             {current === 1 && (
@@ -138,21 +126,25 @@ const Profile = ({ getUser }: { getUser: GetUserType }) => {
             )}
             {current === 3 && (
               <About
-
-
                 setAbout={setAbout}
                 social={about.social}
                 setCurrent={setCurrent}
               />
             )}
             {current === 4 && (
-              <SkillForm submit={submit} loading={loading} setCurrent={setCurrent} setSkills={setSkills} setCategories={setCategories} categories={categories} skills={skills} />
+              <SkillForm
+                submit={submit}
+                loading={loading}
+                setCurrent={setCurrent}
+                setSkills={setSkills}
+                setCategories={setCategories}
+                categories={categories}
+                skills={skills}
+              />
             )}
           </Flex>
         </Flex>
       </Flex>
-
-
     </>
   );
 };

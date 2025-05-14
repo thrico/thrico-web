@@ -28,7 +28,9 @@ function makeClient() {
   });
 
   const uploadLink = createUploadLink({
-    uri: process.env.NEXT_PUBLIC_LOGIN_API_URL,
+    uri: process.env.NEXT_PUBLIC_LOGIN_API_URL
+      ? process.env.NEXT_PUBLIC_LOGIN_API_URL
+      : "https://login.thrico.app/graphql",
   });
 
   const link = errorControl.concat(uploadLink);
