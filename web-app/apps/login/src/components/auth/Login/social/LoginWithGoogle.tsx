@@ -10,15 +10,12 @@ import { decryptToken } from "@/utils/encryption";
 const LoginWithGoogle = () => {
   const router = useRouter();
 
-
   const orgToken = useTokenOrganization.getState().token;
   const [loginWithGoogle, { loading }] = loginByGoogle({
     async onCompleted(data: { loginByGoogle?: { token?: string } }) {
-      if (data?.loginByGoogle?.token)
-        storeToken(data?.loginByGoogle?.token);
+      if (data?.loginByGoogle?.token) storeToken(data?.loginByGoogle?.token);
 
-      router.push(`${process.env.NEXT_PUBLIC_LOGIN_URL}/profile`);
-
+      router.push(`/profile`);
     },
   });
   const storeToken = useTokenStore((state) => state.storeToken);
@@ -32,8 +29,6 @@ const LoginWithGoogle = () => {
       })
       .then((res) => res.data);
 
-
-
     await loginWithGoogle({
       variables: {
         input: {
@@ -43,7 +38,7 @@ const LoginWithGoogle = () => {
           googleId: userInfo.sub,
           email: userInfo.email,
           domain: domain.origin,
-        }
+        },
       },
     });
   };
