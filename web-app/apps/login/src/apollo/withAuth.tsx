@@ -6,14 +6,12 @@ import { Redirect } from "../components/Layout/redirect/Redirect";
 import { useTokenStore } from "../store/store";
 import useFetch from "./getToken";
 
-
-
-export default function withAuth(
-  WrappedComponent: React.ComponentType
-) {
-  return function WithAuth(props: React.ComponentProps<typeof WrappedComponent>) {
+export default function withAuth(WrappedComponent: React.ComponentType) {
+  return function WithAuth(
+    props: React.ComponentProps<typeof WrappedComponent>
+  ) {
     const [urlParams, tokenLoading] = useFetch();
-    const { key } = useTokenStore((state) => ({ key: state.token }));
+    const key = useTokenStore((state) => state.token);
     const searchParams = useSearchParams();
     const token = searchParams?.get("token");
 
@@ -26,7 +24,7 @@ export default function withAuth(
     if (error || (!loading && !getUser && isClient)) {
       return (
         <Redirect
-          to={`${LOGIN_URL}/login?token=${token}&pathname=${typeof urlParams === 'object' ? urlParams?.currentUrl : ''}`}
+          to={`${LOGIN_URL}/login?token=${token}&pathname=${typeof urlParams === "object" ? urlParams?.currentUrl : ""}`}
         />
       );
     }
@@ -40,13 +38,13 @@ export default function withAuth(
         <>
           {!tokenLoading && (
             <Redirect
-              to={`${typeof urlParams === 'object' ? urlParams?.origin : ''}/auth?token=${key}&path=${typeof urlParams === 'object' ? urlParams?.currentUrl : ''}`}
+              to={`${typeof urlParams === "object" ? urlParams?.origin : ""}/auth?token=${key}&path=${typeof urlParams === "object" ? urlParams?.currentUrl : ""}`}
             />
           )}
         </>
       );
     }
 
-    return BASE_URL // Default fallback if none of the conditions are met
+    return BASE_URL; // Default fallback if none of the conditions are met
   };
 }
