@@ -35,7 +35,7 @@ export default function Component() {
 
   return (
     <div style={{ width: "400px", margin: "0 auto" }}>
-      <Card bordered={false}>
+      <Card variant="borderless">
         <Space direction="vertical" size="large" style={{ width: "100%" }}>
           <div style={{ textAlign: "center" }}>
             <Avatar

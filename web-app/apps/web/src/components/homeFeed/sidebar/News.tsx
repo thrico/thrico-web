@@ -56,8 +56,8 @@ export default function News() {
         maxWidth: 400,
         margin: "0 auto",
         borderRadius: 8,
+        padding: "20px 16px",
       }}
-      bodyStyle={{ padding: "20px 16px" }}
     >
       <Space direction="vertical" size="large" style={{ width: "100%" }}>
         <div

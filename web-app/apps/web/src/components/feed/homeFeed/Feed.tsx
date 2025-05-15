@@ -9,7 +9,7 @@ import { addFeed } from "@/graphql/actions/feed";
 
 const HomeFeed = () => {
   const onCompleted = (close) => {
-    close();
+    // close();
   };
 
   const [add, { loading }] = addFeed({
@@ -28,12 +28,12 @@ const HomeFeed = () => {
 
   return (
     <>
-      <FeedCreator
+      {/* <FeedCreator
         add={createFeed}
         loading={loading}
         onCompleted={onCompleted}
         type={"feed"}
-      />
+      /> */}
 
       <Discussion />
     </>

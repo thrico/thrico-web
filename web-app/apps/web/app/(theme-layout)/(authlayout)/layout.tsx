@@ -1,9 +1,9 @@
 "use client";
 
-import withAuth from "@/apollo/withAuth";
+import AuthWrapper from "@/AuthWrapper";
 
-async function RootLayout({ children }: { children: React.ReactNode }) {
-  return <> {children} </>;
+function RootLayout({ children }: { children: React.ReactNode }) {
+  return <AuthWrapper> {children} </AuthWrapper>;
 }
 
-export default withAuth(RootLayout);
+export default RootLayout;
