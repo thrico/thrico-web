@@ -59,7 +59,7 @@ export interface experience {
   employmentType: string;
   location: location;
   locationType: string;
-  duration?: any;
+  duration: any;
   startDate?: string;
 }
 
@@ -74,7 +74,7 @@ export interface education {
     name: string;
     logo: string;
   };
-  duration?: any; // Added duration as an optional tuple
+  duration: any; // Added duration as an optional tuple
 }
 
 export interface educationProps {

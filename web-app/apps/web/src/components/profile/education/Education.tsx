@@ -1,22 +1,7 @@
 import React, { useState } from "react";
-import {
-  Avatar,
-  Button,
-  Card,
-  Flex,
-  List,
-  Popconfirm,
-  Space,
-  Typography,
-
-} from "antd";
-import AddEducation from "./add/AddEducation";
-
-import EditEducation from "./edit/EditEducation";
+import { Avatar, Card, List, Space, Typography } from "antd";
 import moment from "moment";
-import { education, educationProps } from "@/lib/types";
-
-
+import { educationProps } from "@/lib/types";
 
 const Education = ({ education }: educationProps) => {
   // const addEducation = (data: education) => {
@@ -28,7 +13,6 @@ const Education = ({ education }: educationProps) => {
   const cancel = () => {
     setOpen("");
   };
-
 
   return (
     <Space style={{ width: "100%" }} direction="vertical">
@@ -45,59 +29,73 @@ const Education = ({ education }: educationProps) => {
           renderItem={(item, key) => (
             <List.Item
               key={item.id}
-            // actions={[
-            //   <EditEducation
-            //     key={key}
-            //     setEducation={setEducation}
-            //     item={item}
-            //     education={education}
-            //   />,
+              // actions={[
+              //   <EditEducation
+              //     key={key}
+              //     setEducation={setEducation}
+              //     item={item}
+              //     education={education}
+              //   />,
 
-            //   <Popconfirm
-            //     key={key}
-            //     open={open === item.id}
-            //     title="Delete the Education"
-            //     description="Are you sure to delete this Education?"
-            //     onConfirm={() => {
-            //       const filter = education.filter((t) => t.id !== open);
-            //       setEducation(filter);
-            //     }}
-            //     onCancel={cancel}
-            //     okText="Yes"
-            //     cancelText="No"
-            //   >
-            //     <Space onClick={() => setOpen(item.id)}>Delete</Space>
-            //   </Popconfirm>,
-            // ]}
+              //   <Popconfirm
+              //     key={key}
+              //     open={open === item.id}
+              //     title="Delete the Education"
+              //     description="Are you sure to delete this Education?"
+              //     onConfirm={() => {
+              //       const filter = education.filter((t) => t.id !== open);
+              //       setEducation(filter);
+              //     }}
+              //     onCancel={cancel}
+              //     okText="Yes"
+              //     cancelText="No"
+              //   >
+              //     <Space onClick={() => setOpen(item.id)}>Delete</Space>
+              //   </Popconfirm>,
+              // ]}
             >
               <List.Item.Meta
-                avatar={<Avatar src={`https://cdn.thrico.network/${item?.school?.logo}`} />}
+                avatar={
+                  <Avatar
+                    src={`https://cdn.thrico.network/${item?.school?.logo}`}
+                  />
+                }
                 title={
                   <>
                     <Typography.Text>{item.degree}</Typography.Text>
                     <br />
-                    <Typography.Paragraph>{item.school.name}</Typography.Paragraph>
+                    <Typography.Paragraph>
+                      {item.school.name}
+                    </Typography.Paragraph>
                   </>
                 }
                 description={
                   <>
-                    {moment(item?.duration[0])?.format('ll')} - {moment(item?.duration[1]).format('ll')}
+                    {moment(item?.duration[0])?.format("ll")} -{" "}
+                    {moment(item?.duration[1]).format("ll")}
                     <br />
                     <Typography.Text type="secondary">
-                      {moment(item?.duration[1]).diff(moment(item?.duration[0]), 'years') > 0 &&
-                        `${moment(item?.duration[1]).diff(moment(item?.duration[0]), 'years')} years`}
-                      {moment(item?.duration[1]).diff(moment(item?.duration[0]), 'months') % 12 > 0 &&
-                        ` ${moment(item?.duration[1]).diff(moment(item?.duration[0]), 'months') % 12} months`}
+                      {moment(item?.duration[1]).diff(
+                        moment(item?.duration[0]),
+                        "years"
+                      ) > 0 &&
+                        `${moment(item?.duration[1]).diff(moment(item?.duration[0]), "years")} years`}
+                      {moment(item?.duration[1]).diff(
+                        moment(item?.duration[0]),
+                        "months"
+                      ) %
+                        12 >
+                        0 &&
+                        ` ${moment(item?.duration[1]).diff(moment(item?.duration[0]), "months") % 12} months`}
                     </Typography.Text>
                   </>
                 }
               />
-              { }
+              {}
             </List.Item>
           )}
         />
       </Card>
-
     </Space>
   );
 };

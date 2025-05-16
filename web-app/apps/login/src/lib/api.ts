@@ -26,6 +26,7 @@ export async function fetchCategories(query: string): Promise<string[]> {
       "Startup",
     ];
 
+    console.log(query);
     // If query is empty, return all suggestions
     if (!query.trim()) {
       return text;

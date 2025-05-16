@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { Button, DatePicker, Flex, Form, Input, Modal, Space } from "antd";
-import EditForm from "./edit/EditForm";
+
 import { education } from "@/lib/types";
 import { EducationAutocompleteSelect } from "./EducationAutoComplete";
 import TextArea from "antd/es/input/TextArea";
 import dayjs from "dayjs";
-
-
 
 interface props {
   education: education[];
@@ -21,15 +19,12 @@ const EditEducation = ({ item, education, setEducation }: props) => {
     setIsModalOpen("");
   };
   const editEducation = async (ex: education) => {
-
-
     const newState = education.map((obj) =>
       obj.id === ex.id ? { ...ex } : obj
     );
 
     setEducation(newState);
   };
-
 
   const { RangePicker } = DatePicker;
   const [form] = Form.useForm();
@@ -56,7 +51,19 @@ const EditEducation = ({ item, education, setEducation }: props) => {
           title="Edit experience"
           width={700}
           open={isModalOpen === item.id}
-          footer={false}
+          footer={[
+            <Button key={"cancel"} onClick={handleCancel}>
+              Cancel
+            </Button>,
+            <Button
+              key="submit"
+              onClick={() => form.submit()}
+              type="primary"
+              htmlType="submit"
+            >
+              Save
+            </Button>,
+          ]}
           onCancel={handleCancel}
         >
           <Space>
@@ -67,7 +74,6 @@ const EditEducation = ({ item, education, setEducation }: props) => {
               wrapperCol={{ span: 17 }}
               layout="horizontal"
               onFinish={onFinish}
-
               style={{ width: 700 }}
             >
               <Form.Item
@@ -104,7 +110,9 @@ const EditEducation = ({ item, education, setEducation }: props) => {
                 <Input />
               </Form.Item>
               <Form.Item
-                initialValue={item.duration.map((t: string) => dayjs(t, "'YYYY-MM-DD'"))}
+                initialValue={item?.duration.map((t: string) =>
+                  dayjs(t, "'YYYY-MM-DD'")
+                )}
                 hasFeedback
                 rules={[{ required: true }]}
                 name="rangeTimeValue"
@@ -126,20 +134,6 @@ const EditEducation = ({ item, education, setEducation }: props) => {
                 label="Description"
               >
                 <TextArea rows={4} />
-              </Form.Item>
-              <Form.Item style={{ width: "100%" }}>
-                <Space
-                  style={{
-                    width: "100%",
-
-                    justifyContent: "center",
-                  }}
-                >
-                  <Button onClick={handleCancel}>Cancel</Button>
-                  <Button type="primary" htmlType="submit">
-                    Save
-                  </Button>
-                </Space>
               </Form.Item>
             </Form>
           </Space>

@@ -10,7 +10,6 @@ import {
   GET_PAGES,
   GET_TAGS,
   GET_USER,
-  GET_YEAR,
   GOOGLE_LOGIN,
   LOGIN_BY_OTP,
 } from "../queries";

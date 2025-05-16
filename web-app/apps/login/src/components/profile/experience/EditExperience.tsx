@@ -1,19 +1,20 @@
-
 import React, { useState } from "react";
-import { Button, Checkbox, DatePicker, Form, Input, Modal, Select, Space } from "antd";
+import {
+  Button,
+  Checkbox,
+  DatePicker,
+  Form,
+  Input,
+  Modal,
+  Select,
+  Space,
+} from "antd";
 
 import { experience } from "@/lib/types";
 
 import { EducationAutocompleteSelect } from "../education/EducationAutoComplete";
 import GooglePlacesInput from "@/components/location/Google-places-autocomplete";
 import dayjs from "dayjs";
-
-
-
-
-
-
-
 
 interface props {
   experience: experience[];
@@ -22,7 +23,6 @@ interface props {
 }
 
 const EditExperience = ({ item, experience, setExperience }: props) => {
-
   const [isModalOpen, setIsModalOpen] = useState<string>("");
 
   const handleCancel = () => {
@@ -52,14 +52,15 @@ const EditExperience = ({ item, experience, setExperience }: props) => {
       ...values,
       id: item?.id,
 
-      duration: !currentlyWorking ? [
-        rangeTimeValue[0].format("YYYY-MM-DD HH:mm:ss"),
-        rangeTimeValue[1].format("YYYY-MM-DD HH:mm:ss"),
-      ] : "",
-      startDate: currentlyWorking ?
-        startDate.format("YYYY-MM-DD HH:mm:ss") : "",
-
-
+      duration: !currentlyWorking
+        ? [
+            rangeTimeValue[0].format("YYYY-MM-DD HH:mm:ss"),
+            rangeTimeValue[1].format("YYYY-MM-DD HH:mm:ss"),
+          ]
+        : "",
+      startDate: currentlyWorking
+        ? startDate.format("YYYY-MM-DD HH:mm:ss")
+        : "",
     };
     delete value["rangeTimeValue"];
     delete value["Start Date"];
@@ -77,6 +78,19 @@ const EditExperience = ({ item, experience, setExperience }: props) => {
           open={isModalOpen === item.id}
           footer={false}
           onCancel={handleCancel}
+          footer={[
+            <Button key={"cancel"} onClick={handleCancel}>
+              Cancel
+            </Button>,
+            <Button
+              key="submit"
+              onClick={() => form.submit()}
+              type="primary"
+              htmlType="submit"
+            >
+              Save
+            </Button>,
+          ]}
         >
           <Space>
             <Form
@@ -86,7 +100,6 @@ const EditExperience = ({ item, experience, setExperience }: props) => {
               wrapperCol={{ span: 17 }}
               layout="horizontal"
               onFinish={onFinish}
-
               style={{ width: 700 }}
             >
               <Form.Item
@@ -121,7 +134,9 @@ const EditExperience = ({ item, experience, setExperience }: props) => {
                 <Select>
                   <Select.Option value="Full Time">Full Time</Select.Option>
                   <Select.Option value="Part Time">Part Time</Select.Option>
-                  <Select.Option value="Self Employed">Self Employed</Select.Option>
+                  <Select.Option value="Self Employed">
+                    Self Employed
+                  </Select.Option>
                   <Select.Option value="Internship">Internship</Select.Option>
                   <Select.Option value="Trainee">Trainee</Select.Option>
                   <Select.Option value="Freelance">Freelance</Select.Option>
@@ -150,52 +165,48 @@ const EditExperience = ({ item, experience, setExperience }: props) => {
                 <Checkbox>I am currently working in this role</Checkbox>
               </Form.Item>
 
-
-
-              {
-                !currentlyWorking && (
-                  <Form.Item
-                    initialValue={
-                      item?.duration && item?.duration.length > 0
-                        ? item?.duration?.map((t: string) =>
+              {!currentlyWorking && (
+                <Form.Item
+                  initialValue={
+                    item?.duration && item?.duration.length > 0
+                      ? item?.duration?.map((t: string) =>
                           dayjs(t, "YYYY-MM-DD")
                         )
-                        : undefined
+                      : undefined
+                  }
+                  hasFeedback
+                  rules={[{ required: true }]}
+                  name="rangeTimeValue"
+                  label="Duration"
+                >
+                  <RangePicker
+                    picker="month"
+                    format="YYYY-MM"
+                    disabledDate={(current) =>
+                      current && current > dayjs().endOf("day")
                     }
-                    hasFeedback
-                    rules={[{ required: true }]}
-                    name="rangeTimeValue"
-                    label="Duration"
-                  >
-                    <RangePicker
-                      picker="month"
-                      format="YYYY-MM"
-                      disabledDate={(current) => current && current > dayjs().endOf('day')}
-                    />
-                  </Form.Item>
-                )
-              }
+                  />
+                </Form.Item>
+              )}
 
-              {
-                currentlyWorking && (
-                  <Form.Item
-                    initialValue={
-                      dayjs(item?.startDate, "YYYY-MM-DD")
+              {currentlyWorking && (
+                <Form.Item
+                  initialValue={dayjs(item?.startDate, "YYYY-MM-DD")}
+                  hasFeedback
+                  rules={[{ required: true }]}
+                  name="Start Date"
+                  label="Start Date"
+                >
+                  <DatePicker
+                    picker="month"
+                    format="YYYY-MM"
+                    disabledDate={(current) =>
+                      current && current > dayjs().endOf("day")
                     }
-                    hasFeedback
-                    rules={[{ required: true }]}
-                    name="Start Date"
-                    label="Start Date"
-                  >
-                    <DatePicker
-                      picker="month"
-                      format="YYYY-MM"
-                      disabledDate={(current) => current && current > dayjs().endOf('day')}
                     // Disable end date if currentlyWorking is true
-                    />
-                  </Form.Item>
-                )
-              }
+                  />
+                </Form.Item>
+              )}
 
               <Form.Item
                 initialValue={item?.locationType}
@@ -209,20 +220,6 @@ const EditExperience = ({ item, experience, setExperience }: props) => {
                   <Select.Option value="Hybrid">Hybrid</Select.Option>
                   <Select.Option value="Remote">Remote</Select.Option>
                 </Select>
-              </Form.Item>
-              <Form.Item style={{ width: "100%" }}>
-                <Space
-                  style={{
-                    width: "100%",
-
-                    justifyContent: "center",
-                  }}
-                >
-                  <Button onClick={handleCancel}>Cancel</Button>
-                  <Button type="primary" htmlType="submit">
-                    Save
-                  </Button>
-                </Space>
               </Form.Item>
             </Form>
           </Space>

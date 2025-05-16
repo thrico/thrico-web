@@ -45,6 +45,6 @@ export default function withAuth(WrappedComponent: React.ComponentType) {
       );
     }
 
-    return BASE_URL; // Default fallback if none of the conditions are met
+    return BASE_URL;
   };
 }

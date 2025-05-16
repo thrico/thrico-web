@@ -20,7 +20,6 @@ const AddEducation = ({ addEducation }: props) => {
     setIsModalOpen(false);
   };
 
-
   const { RangePicker } = DatePicker;
   const [form] = Form.useForm();
   const id = v4();
@@ -38,7 +37,9 @@ const AddEducation = ({ addEducation }: props) => {
     const value = {
       id,
       ...values,
-      duration: rangeTimeValue.map((date: any) => date.format("YYYY-MM-DD HH:mm:ss")),
+      duration: rangeTimeValue.map((date: any) =>
+        date.format("YYYY-MM-DD HH:mm:ss")
+      ),
     };
     delete value.rangeTimeValue;
 
@@ -56,11 +57,17 @@ const AddEducation = ({ addEducation }: props) => {
         title="Add Education"
         width={700}
         open={isModalOpen}
-        footer={false}
         onCancel={handleCancel}
+        footer={[
+          <Button key="cancel" onClick={handleCancel}>
+            Cancel
+          </Button>,
+          <Button key="submit" type="primary" onClick={() => form.submit()}>
+            Add
+          </Button>,
+        ]}
       >
         <Space>
-
           <Form
             form={form}
             name="register"
@@ -68,18 +75,16 @@ const AddEducation = ({ addEducation }: props) => {
             wrapperCol={{ span: 17 }}
             layout="horizontal"
             onFinish={onFinish}
-
-
-
             style={{ width: 700 }}
           >
-
             <Form.Item
               hasFeedback
               style={{ width: "100%" }}
               name="school"
               label="School/Institute"
-              rules={[{ required: true, message: "Please enter School/Institute" }]}
+              rules={[
+                { required: true, message: "Please enter School/Institute" },
+              ]}
             >
               <EducationAutocompleteSelect
                 onChange={(value) => form.setFieldsValue({ school: value })}
@@ -109,10 +114,7 @@ const AddEducation = ({ addEducation }: props) => {
               name="rangeTimeValue"
               label="Duration"
             >
-              <RangePicker picker="month" format="YYYY-MM"
-
-
-              />
+              <RangePicker picker="month" format="YYYY-MM" />
             </Form.Item>
             <Form.Item
               rules={[{ required: true }]}
@@ -123,21 +125,6 @@ const AddEducation = ({ addEducation }: props) => {
             </Form.Item>
             <Form.Item name="description" label="Description">
               <TextArea rows={4} />
-            </Form.Item>
-            <Form.Item >
-
-              <Space
-                style={{
-                  width: "100%",
-                  justifyContent: "center",
-                }}
-              >
-                <Button type="primary" htmlType="submit">
-                  Add
-                </Button>
-                <Button onClick={handleCancel}>Cancel</Button>
-
-              </Space>
             </Form.Item>
           </Form>
         </Space>

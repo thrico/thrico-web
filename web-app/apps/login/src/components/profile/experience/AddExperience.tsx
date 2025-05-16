@@ -1,13 +1,20 @@
 import React, { useState } from "react";
-import { Button, Checkbox, DatePicker, Form, Input, Modal, Select, Space } from "antd";
+import {
+  Button,
+  Checkbox,
+  DatePicker,
+  Form,
+  Input,
+  Modal,
+  Select,
+  Space,
+} from "antd";
 
 import { experience } from "@/lib/types";
 import { v4 } from "uuid";
 import { EducationAutocompleteSelect } from "../education/EducationAutoComplete";
 import GooglePlacesInput from "@/components/location/Google-places-autocomplete";
 import dayjs from "dayjs";
-
-
 
 interface props {
   addExperience(ex: experience): void;
@@ -34,12 +41,15 @@ const AddExperience = ({ addExperience }: props) => {
     const value = {
       id,
       ...values,
-      duration: !currentlyWorking ? [
-        rangeTimeValue[0].format("YYYY-MM-DD HH:mm:ss"),
-        rangeTimeValue[1].format("YYYY-MM-DD HH:mm:ss"),
-      ] : '',
-      startDate: currentlyWorking ?
-        startDate.format("YYYY-MM-DD HH:mm:ss") : "",
+      duration: !currentlyWorking
+        ? [
+            rangeTimeValue[0].format("YYYY-MM-DD HH:mm:ss"),
+            rangeTimeValue[1].format("YYYY-MM-DD HH:mm:ss"),
+          ]
+        : "",
+      startDate: currentlyWorking
+        ? startDate.format("YYYY-MM-DD HH:mm:ss")
+        : "",
     };
     delete value["rangeTimeValue"];
     delete value["Start Date"];
@@ -59,7 +69,14 @@ const AddExperience = ({ addExperience }: props) => {
         title="Add experience"
         width={700}
         open={isModalOpen}
-        footer={false}
+        footer={[
+          <Button key="cancel" onClick={handleCancel}>
+            Cancel
+          </Button>,
+          <Button key="submit" type="primary" onClick={() => form.submit()}>
+            Add
+          </Button>,
+        ]}
         onCancel={handleCancel}
       >
         <Space>
@@ -70,7 +87,6 @@ const AddExperience = ({ addExperience }: props) => {
             wrapperCol={{ span: 17 }}
             layout="horizontal"
             onFinish={onFinish}
-
             style={{ width: 700 }}
           >
             <Form.Item
@@ -102,7 +118,9 @@ const AddExperience = ({ addExperience }: props) => {
               <Select>
                 <Select.Option value="Full Time">Full Time</Select.Option>
                 <Select.Option value="Part Time">Part Time</Select.Option>
-                <Select.Option value="Self Employed">Self Employed</Select.Option>
+                <Select.Option value="Self Employed">
+                  Self Employed
+                </Select.Option>
                 <Select.Option value="Internship">Internship</Select.Option>
                 <Select.Option value="Trainee">Trainee</Select.Option>
                 <Select.Option value="Freelance">Freelance</Select.Option>
@@ -123,49 +141,46 @@ const AddExperience = ({ addExperience }: props) => {
             <Form.Item
               name="currentlyWorking"
               valuePropName="checked"
-
               wrapperCol={{ offset: 5, span: 17 }}
             >
               <Checkbox>I am currently working in this role</Checkbox>
             </Form.Item>
 
-            {
-              !currentlyWorking && (
-                <Form.Item
-
-                  hasFeedback
-                  rules={[{ required: true }]}
-                  name="rangeTimeValue"
-                  label="Duration"
-                >
-                  <RangePicker
-                    picker="month"
-                    format="YYYY-MM"
-                    disabledDate={(current) => current && current > dayjs().endOf('day')}
+            {!currentlyWorking && (
+              <Form.Item
+                hasFeedback
+                rules={[{ required: true }]}
+                name="rangeTimeValue"
+                label="Duration"
+              >
+                <RangePicker
+                  picker="month"
+                  format="YYYY-MM"
+                  disabledDate={(current) =>
+                    current && current > dayjs().endOf("day")
+                  }
                   // Disable end date if currentlyWorking is true
-                  />
-                </Form.Item>
-              )
-            }
+                />
+              </Form.Item>
+            )}
 
-            {
-              currentlyWorking && (
-                <Form.Item
-
-                  hasFeedback
-                  rules={[{ required: true }]}
-                  name="Start Date"
-                  label="Start Date"
-                >
-                  <DatePicker
-                    picker="month"
-                    format="YYYY-MM"
-                    disabledDate={(current) => current && current > dayjs().endOf('day')}
+            {currentlyWorking && (
+              <Form.Item
+                hasFeedback
+                rules={[{ required: true }]}
+                name="Start Date"
+                label="Start Date"
+              >
+                <DatePicker
+                  picker="month"
+                  format="YYYY-MM"
+                  disabledDate={(current) =>
+                    current && current > dayjs().endOf("day")
+                  }
                   // Disable end date if currentlyWorking is true
-                  />
-                </Form.Item>
-              )
-            }
+                />
+              </Form.Item>
+            )}
             <Form.Item
               rules={[{ required: true }]}
               name="locationType"
@@ -176,20 +191,6 @@ const AddExperience = ({ addExperience }: props) => {
                 <Select.Option value="Hybrid">Hybrid</Select.Option>
                 <Select.Option value="Remote">Remote</Select.Option>
               </Select>
-            </Form.Item>
-            <Form.Item style={{ width: "100%" }}>
-              <Space
-                style={{
-                  width: "100%",
-
-                  justifyContent: "center",
-                }}
-              >
-                <Button onClick={handleCancel}>Cancel</Button>
-                <Button type="primary" htmlType="submit">
-                  Add
-                </Button>
-              </Space>
             </Form.Item>
           </Form>
         </Space>

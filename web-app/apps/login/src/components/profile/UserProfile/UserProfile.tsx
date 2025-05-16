@@ -23,7 +23,6 @@ const UserProfile = ({
   setCurrent,
   getUser,
 }: UserProfileProps) => {
-
   const [form] = Form.useForm();
 
   const onFinish = (values: any) => {
@@ -37,7 +36,7 @@ const UserProfile = ({
       ...value,
     });
 
-    console.log(value, profile, "sdd")
+    console.log(value, profile, "sdd");
     setCurrent(1);
   };
 
@@ -46,7 +45,7 @@ const UserProfile = ({
     return current && current > dayjs().endOf("day");
   };
 
-  console.log(profile)
+  console.log(profile);
   return (
     <>
       <Form
@@ -76,7 +75,9 @@ const UserProfile = ({
             { max: 50, message: "Max 50 characters allowed" },
           ]}
           hasFeedback
-          initialValue={profile.fistName ? profile.fistName : getUser?.firstName}
+          initialValue={
+            profile.fistName ? profile.fistName : getUser?.firstName
+          }
         >
           <Input style={{ width: "100%" }} />
         </Form.Item>
@@ -211,8 +212,6 @@ const UserProfile = ({
           <TextArea style={{ width: "100%" }} maxLength={150} showCount />
         </Form.Item>
 
-
-
         <Form.Item
           hasFeedback
           style={{ width: "47%" }}
@@ -224,11 +223,8 @@ const UserProfile = ({
           <GooglePlacesInput
             initialValue={profile?.location}
             onChange={(value) => form.setFieldsValue({ location: value })}
-
           />
-
         </Form.Item>
-
 
         <Form.Item
           hasFeedback

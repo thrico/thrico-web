@@ -1,35 +1,74 @@
 import { AboutType } from "@/lib/types";
 import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Card, Flex, Form, Input, Select, Space } from "antd";
-import { Option } from "antd/es/mentions";
-import React from "react";
+import React, { useState } from "react";
+
+const { Option } = Select;
 
 interface AboutProps {
   setAbout: (about: AboutType) => void;
   setCurrent: (step: number) => void;
-
   social: Array<{ url: string; platform: string }>;
 }
 
-const About: React.FC<AboutProps> = ({
-  setAbout,
-  setCurrent,
+// Social platform → URL prefix map
+const platformURLPrefixes: Record<string, string> = {
+  instagram: "https://instagram.com/",
+  linkedIn: "https://linkedin.com/in/",
+  x: "https://x.com/",
+  gitHub: "https://github.com/",
+  facebook: "https://facebook.com/",
+  twitter: "https://twitter.com/",
+  youtube: "https://youtube.com/",
+  pinterest: "https://pinterest.com/",
+  snapchat: "https://snapchat.com/add/",
+  tiktok: "https://tiktok.com/@",
+  reddit: "https://reddit.com/u/",
+  tumblr: "https://tumblr.com/",
+  whatsapp: "https://wa.me/",
+  telegram: "https://t.me/",
+  discord: "https://discord.com/users/",
+  slack: "https://slack.com/",
+  weChat: "https://wechat.com/",
+  line: "https://line.me/",
+  viber: "https://viber.com/",
+  quora: "https://quora.com/profile/",
+};
 
-  social,
-}) => {
+const About: React.FC<AboutProps> = ({ setAbout, setCurrent, social }) => {
   const [form] = Form.useForm();
+  const [urlPrefixes, setUrlPrefixes] = useState<{ [key: number]: string }>({});
 
   const onFinish = (values: any) => {
-    setAbout(values);
+    // Combine prefix + user input before submission
+    const transformedSocial = values.social.map((item: any, index: number) => ({
+      platform: item.platform,
+      url: (urlPrefixes[index] || "") + (item.url || ""),
+    }));
+    setAbout({ ...values, social: transformedSocial });
     setCurrent(4);
+  };
+
+  const handlePlatformChange = (platform: string, name: number) => {
+    const prefix = platformURLPrefixes[platform] || "";
+    setUrlPrefixes((prev) => ({ ...prev, [name]: prefix }));
+
+    const currentSocial = form.getFieldValue("social") || [];
+    const updatedSocial = [...currentSocial];
+    updatedSocial[name] = {
+      ...updatedSocial[name],
+      platform,
+    };
+    form.setFieldsValue({ social: updatedSocial });
   };
 
   return (
     <Form
       name="dynamic_form_nest_item"
+      form={form}
       onFinish={onFinish}
-      style={{ justifyContent: "center", width: "100%" }}
       autoComplete="off"
+      style={{ width: "100%" }}
     >
       <Flex vertical style={{ width: "100%" }} gap={10}>
         <Card style={{ width: "100%" }}>
@@ -42,71 +81,54 @@ const About: React.FC<AboutProps> = ({
                 style={{ width: "100%" }}
                 gap={10}
               >
-                <>
-                  {fields.map(({ key, name, ...restField }) => (
-                    <Space
-                      key={key}
-                      style={{
-                        display: "flex",
-                        marginBottom: 8,
-                        justifyContent: "center",
-                        width: "80%",
-                        gap: 20,
-                      }}
-                      align="baseline"
+                {fields.map(({ key, name, ...restField }) => (
+                  <Space
+                    key={key}
+                    style={{
+                      display: "flex",
+                      marginBottom: 8,
+                      justifyContent: "center",
+                      width: "80%",
+                      gap: 20,
+                    }}
+                    align="baseline"
+                  >
+                    <Form.Item
+                      {...restField}
+                      name={[name, "url"]}
+                      rules={[{ required: true, message: "Missing URL" }]}
                     >
-                      <Form.Item
-                        {...restField}
-                        name={[name, "url"]}
-                        rules={[{ required: true, message: "Missing Url" }]}
+                      <Input
+                        placeholder="Username or ID"
+                        addonBefore={urlPrefixes[name] || "https://"}
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      style={{ width: 150 }}
+                      {...restField}
+                      name={[name, "platform"]}
+                      rules={[{ required: true, message: "Missing platform" }]}
+                    >
+                      <Select
+                        placeholder="Select Platform"
+                        onChange={(value) => handlePlatformChange(value, name)}
                       >
-                        <Input placeholder="First Name" />
-                      </Form.Item>
-                      <Form.Item
-                        style={{ width: 150 }}
-                        {...restField}
-                        name={[name, "platform"]}
-                        rules={[
-                          {
-                            required: true,
-                            message: "Missing social media details",
-                          },
-                        ]}
-                      >
-                        <Select placeholder="Select Social Media">
-                          <Option value="instagram">Instagram</Option>
-                          <Option value="linkedIn">LinkedIn</Option>
-                          <Option value="x">X</Option>
-                          <Option value="gitHub">GitHub</Option>
-                          <Option value="facebook">Facebook</Option>
-                          <Option value="twitter">Twitter</Option>
-                          <Option value="youtube">YouTube</Option>
-                          <Option value="pinterest">Pinterest</Option>
-                          <Option value="snapchat">Snapchat</Option>
-                          <Option value="tiktok">TikTok</Option>
-                          <Option value="reddit">Reddit</Option>
-                          <Option value="tumblr">Tumblr</Option>
-                          <Option value="whatsapp">WhatsApp</Option>
-                          <Option value="telegram">Telegram</Option>
-                          <Option value="discord">Discord</Option>
-                          <Option value="slack">Slack</Option>
-                          <Option value="weChat">WeChat</Option>
-                          <Option value="line">Line</Option>
-                          <Option value="viber">Viber</Option>
-                          <Option value="quora">Quora</Option>
-                        </Select>
-                      </Form.Item>
-                      <DeleteOutlined onClick={() => remove(name)} />
-                    </Space>
-                  ))}
-                </>
-
+                        {Object.entries(platformURLPrefixes).map(([value]) => (
+                          <Option key={value} value={value}>
+                            {value.charAt(0).toUpperCase() + value.slice(1)}
+                          </Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                    <DeleteOutlined onClick={() => remove(name)} />
+                  </Space>
+                ))}
                 <Button
-                  style={{ width: "30%" }}
                   type="dashed"
                   onClick={() => add()}
                   block
                   icon={<PlusOutlined />}
+                  style={{ width: "30%" }}
                 >
                   Add Social Media
                 </Button>
@@ -114,14 +136,10 @@ const About: React.FC<AboutProps> = ({
             )}
           </Form.List>
         </Card>
-        <Flex
-          style={{ width: "100%", marginTop: 29 }}
-          justify="center"
-          align="center"
-        >
+
+        <Flex justify="center" align="center" style={{ marginTop: 29 }}>
           <Space>
             <Button onClick={() => setCurrent(2)}>Previous</Button>
-
             <Button type="primary" htmlType="submit">
               Next
             </Button>
