@@ -86,6 +86,9 @@ importers:
       graphql-ws:
         specifier: ^6.0.4
         version: 6.0.4(graphql@16.10.0)
+      lexical:
+        specifier: ^0.32.0
+        version: 0.32.0
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -2138,6 +2141,9 @@ packages:
 
   lexical@0.31.1:
     resolution: {integrity: sha512-uS8yz3Soc+7h80OTXVhFSWflVJR6mqO7XoU8EXImDT1d8u8dVyitlCNs6kCz1HryTevcxHexHgGxf6kUg0IUgQ==}
+
+  lexical@0.32.0:
+    resolution: {integrity: sha512-B+NIE/Z0Lqa9uL6M2W1p6YVGExvHVX50fxzS6/ZnQJskkbBxdt6+7Ifgli2wAltTqKWBe7qf+YlFjHIP0u5ffw==}
 
   lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
@@ -5637,6 +5643,8 @@ snapshots:
       type-check: 0.4.0
 
   lexical@0.31.1: {}
+
+  lexical@0.32.0: {}
 
   lines-and-columns@1.2.4: {}
 
