@@ -140,7 +140,7 @@ const UserProfile = ({
         {profile.DOB !== "" && (
           <Form.Item
             hasFeedback
-            // initialValue={dayjs(profile.DOB, "YYYY/MM/DD")}
+            initialValue={dayjs(profile.DOB, "YYYY/MM/DD")}
             style={{ width: "48%" }}
             name="month-picker"
             label="Date of Birth"
