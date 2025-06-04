@@ -76,7 +76,7 @@ const UserProfile = ({
           ]}
           hasFeedback
           initialValue={
-            profile.fistName ? profile.fistName : getUser?.firstName
+            profile?.fistName ? profile?.fistName : getUser?.firstName
           }
         >
           <Input style={{ width: "100%" }} />
@@ -90,7 +90,9 @@ const UserProfile = ({
             { required: true },
             { max: 50, message: "Max 50 characters allowed" },
           ]}
-          initialValue={profile.lastName ? profile.lastName : getUser?.lastName}
+          initialValue={
+            profile?.lastName ? profile?.lastName : getUser?.lastName
+          }
         >
           <Input style={{ width: "100%" }} />
         </Form.Item>
