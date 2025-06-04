@@ -122,4 +122,6 @@ export interface ProfileStore {
   setCategories: (categories: string[]) => void;
   skills: string[];
   categories: string[];
+  agreement: boolean;
+  setAgreement: (agreement: boolean) => void;
 }

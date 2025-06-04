@@ -44,6 +44,12 @@ importers:
       '@faker-js/faker':
         specifier: ^9.7.0
         version: 9.7.0
+      '@lexical/html':
+        specifier: ^0.31.1
+        version: 0.31.1
+      '@lexical/rich-text':
+        specifier: ^0.31.1
+        version: 0.31.1
       '@react-oauth/google':
         specifier: ^0.12.1
         version: 0.12.1(react-dom@19.1.0(react@18.3.1))(react@18.3.1)
@@ -733,6 +739,27 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
+
+  '@lexical/clipboard@0.31.1':
+    resolution: {integrity: sha512-+h5riX4c+6htFN/2xrYwYEakF//vZKMscE2UJzwrSdU9qi6S15HDMBj3jHGBG4Uu1/MvNLzj8g56x8K+yMi+hg==}
+
+  '@lexical/html@0.31.1':
+    resolution: {integrity: sha512-5GwKdQJgR/PNnYKOygr1rfUns2VJqK5mSzgLsB2mOlyLAFwogTd2AKTntksBXexzJFkM93OJ0t1QntFEkOhIaA==}
+
+  '@lexical/list@0.31.1':
+    resolution: {integrity: sha512-bSsMyAczwo7WXFH2Av8cbfyL+nTcTBw7gMeuA7q56UjSOTji4VcQlDGpk6zQ3h1xV9Ry9vbaB9D1VlgmDzhndg==}
+
+  '@lexical/rich-text@0.31.1':
+    resolution: {integrity: sha512-AB9B9zac5n7syLrghUzNNy9eRPm0kHXxkrKusVWY4QHUMC0CLl5xd928MvPSiktIaHmTeVLLX4MOFKaq6KfPXw==}
+
+  '@lexical/selection@0.31.1':
+    resolution: {integrity: sha512-5nzWd8cszqxFx0fyN4f+ZJsy5OCxZ6Q3ui8YhTHPGxh7mmGEEFBwy+O+s08ZOIB2DZO4kE6AKShsBMVZ/i95vA==}
+
+  '@lexical/table@0.31.1':
+    resolution: {integrity: sha512-cjO4FNoZcLoOkMNbVEBX0tu8l6kEjHPQU/mLxC5X1PPfXZIUsi+hTvQCDvnby07o6MgotNL5OGsiZfaQUHfXQg==}
+
+  '@lexical/utils@0.31.1':
+    resolution: {integrity: sha512-SGd+8+kOXkGJubyn6DUYfZsnEuxGRazfqYPaGfX0x2+AL+AARqqop+gQK/1oe0gcKV8UggdLT3QkjfTDxMWsPg==}
 
   '@next/env@13.5.11':
     resolution: {integrity: sha512-fbb2C7HChgM7CemdCY+y3N1n8pcTKdqtQLbC7/EQtPdLvlMUT9JX/dBYl8MMZAtYG4uVMyPFHXckb68q/NRwqg==}
@@ -2108,6 +2135,9 @@ packages:
   levn@0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
     engines: {node: '>= 0.8.0'}
+
+  lexical@0.31.1:
+    resolution: {integrity: sha512-uS8yz3Soc+7h80OTXVhFSWflVJR6mqO7XoU8EXImDT1d8u8dVyitlCNs6kCz1HryTevcxHexHgGxf6kUg0IUgQ==}
 
   lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
@@ -3931,6 +3961,50 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
+  '@lexical/clipboard@0.31.1':
+    dependencies:
+      '@lexical/html': 0.31.1
+      '@lexical/list': 0.31.1
+      '@lexical/selection': 0.31.1
+      '@lexical/utils': 0.31.1
+      lexical: 0.31.1
+
+  '@lexical/html@0.31.1':
+    dependencies:
+      '@lexical/selection': 0.31.1
+      '@lexical/utils': 0.31.1
+      lexical: 0.31.1
+
+  '@lexical/list@0.31.1':
+    dependencies:
+      '@lexical/selection': 0.31.1
+      '@lexical/utils': 0.31.1
+      lexical: 0.31.1
+
+  '@lexical/rich-text@0.31.1':
+    dependencies:
+      '@lexical/clipboard': 0.31.1
+      '@lexical/selection': 0.31.1
+      '@lexical/utils': 0.31.1
+      lexical: 0.31.1
+
+  '@lexical/selection@0.31.1':
+    dependencies:
+      lexical: 0.31.1
+
+  '@lexical/table@0.31.1':
+    dependencies:
+      '@lexical/clipboard': 0.31.1
+      '@lexical/utils': 0.31.1
+      lexical: 0.31.1
+
+  '@lexical/utils@0.31.1':
+    dependencies:
+      '@lexical/list': 0.31.1
+      '@lexical/selection': 0.31.1
+      '@lexical/table': 0.31.1
+      lexical: 0.31.1
+
   '@next/env@13.5.11': {}
 
   '@next/env@15.3.0': {}
@@ -5561,6 +5635,8 @@ snapshots:
     dependencies:
       prelude-ls: 1.2.1
       type-check: 0.4.0
+
+  lexical@0.31.1: {}
 
   lines-and-columns@1.2.4: {}
 

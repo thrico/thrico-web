@@ -16,6 +16,7 @@ export default async function RootLayout({
     // Fetch data and handle potential errors within RootLayout
     const data = await getData();
 
+    console.log(data);
     return (
       <html lang="en">
         <ApolloWrapper>
@@ -35,9 +36,9 @@ export default async function RootLayout({
                     },
                   },
                   token: {
-                    ...data?.theme,
+                    colorPrimary: data?.theme?.primaryColor,
                     fontFamily: "'Work Sans', sans-serif;", // Ensuring font className usage
-                    itemSelectedBg: "red",
+
                     borderRadius: 20,
                   },
                 }}

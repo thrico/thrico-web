@@ -109,7 +109,7 @@ export default function ProfilePage() {
                 500+ connections
               </Link>
               <Divider />
-              <Space direction="vertical" style={{ marginTop: 20 }} align="end">
+              {/* <Space direction="vertical" style={{ marginTop: 20 }} align="end">
                 <Space size="large">
                   <Link href="https://linkedin.com/in/yourprofile">
                     <LinkedinOutlined
@@ -125,7 +125,7 @@ export default function ProfilePage() {
                     <GlobalOutlined style={{ fontSize: 24, color: "black" }} />
                   </Link>
                 </Space>
-              </Space>
+              </Space> */}
             </div>
           </Card>
         </Space>
@@ -145,7 +145,7 @@ export default function ProfilePage() {
             </Space>
           </Card>
 
-          <Card>
+          {/* <Card>
             <Space align="start" style={{ width: "100%" }}>
               <div>
                 <Title level={4}>Public profile & URL</Title>
@@ -153,7 +153,7 @@ export default function ProfilePage() {
               </div>
               <Button type="text" icon={<EditOutlined />} />
             </Space>
-          </Card>
+          </Card> */}
 
           <Card>
             <Tag

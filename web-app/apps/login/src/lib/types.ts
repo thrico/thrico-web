@@ -98,6 +98,14 @@ export interface GetUserType {
   firstName?: string;
   lastName?: string;
   email?: string;
+  profile: {
+    profile: ProfileType;
+    about: AboutType;
+    experience: experience[];
+    education: education[];
+    skills: string[];
+    categories: string[];
+  };
 }
 export interface social {
   url: string;
@@ -123,4 +131,6 @@ export interface ProfileStore {
   setCategories: (categories: string[]) => void;
   skills: string[];
   categories: string[];
+  agreement: boolean;
+  setAgreement: (agreement: boolean) => void;
 }

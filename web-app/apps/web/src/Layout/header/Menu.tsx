@@ -1,9 +1,6 @@
-import { BellOutlined, HomeOutlined } from "@ant-design/icons";
 import { Menu, theme } from "antd";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-
-import { MdChatBubbleOutline, MdDashboard } from "react-icons/md";
 
 import { FaGlobe, FaHome, FaRegCalendarAlt } from "react-icons/fa";
 import { TiGroup } from "react-icons/ti";
@@ -11,8 +8,7 @@ import { useParams, usePathname } from "next/navigation";
 
 import { useGetUser } from "@/graphql/actions";
 import { getItem } from "@/components/common/getItem";
-import Menus from "@/components/menu/ThricoMenu";
-import { BiBellMinus } from "react-icons/bi";
+
 import { GiTeacher } from "react-icons/gi";
 import { CiShop } from "react-icons/ci";
 const MenuItem = () => {
@@ -35,14 +31,14 @@ const MenuItem = () => {
     //   <FaUserFriends style={{ fontSize: 20 }} />
     // ),
 
-    getItem(
-      <Link shallow href="/feed">
-        Home
-      </Link>,
-      "home",
+    // getItem(
+    //   <Link shallow href="/feed">
+    //     Home
+    //   </Link>,
+    //   "home",
 
-      <FaHome size={18} />
-    ),
+    //   <FaHome size={18} />
+    // ),
 
     getItem(
       <Link shallow href="/network">

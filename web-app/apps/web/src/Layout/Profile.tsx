@@ -6,7 +6,7 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Avatar,  Dropdown,  Space } from "antd";
+import { Avatar, Dropdown, Space } from "antd";
 
 import Link from "next/link";
 
@@ -32,13 +32,13 @@ const items: MenuItem[] = [
   //   "/dashboard",
   //   <FaHome />
   // ),
-  getItem(
-    <Link href="/feed" rel="noopener noreferrer">
-      Dashboard
-    </Link>,
-    "/feed",
-    <MenuOutlined/>
-  ),
+  // getItem(
+  //   <Link href="/feed" rel="noopener noreferrer">
+  //     Dashboard
+  //   </Link>,
+  //   "/feed",
+  //   <MenuOutlined/>
+  // ),
   getItem(
     <Link href="/profile" rel="noopener noreferrer">
       My Profile

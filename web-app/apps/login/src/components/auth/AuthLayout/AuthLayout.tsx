@@ -21,7 +21,6 @@ const AuthLayout = ({ children, svg, width, logo, name }: props) => (
         height: "100vh",
         width: "100vw",
       }}
-      style={{ width: "100%", height: "100vh" }}
       align="center"
       justify="center"
     >
@@ -39,21 +38,23 @@ const AuthLayout = ({ children, svg, width, logo, name }: props) => (
                 background: "#fff",
                 width: width ? width : 1000,
               }}
-              className="auth-card"
               actions={[
                 <Typography.Link
+                  key="help"
                   target="_blank"
                   href="https://thrico.com/privacy-policy/"
                 >
                   Help
                 </Typography.Link>,
                 <Typography.Link
+                  key="privacy"
                   target="_blank"
                   href="https://thrico.com/privacy-policy/"
                 >
                   Privacy
                 </Typography.Link>,
                 <Typography.Link
+                  key="terms"
                   target="_blank"
                   href="https://thrico.com/privacy-policy/"
                 >
@@ -66,7 +67,7 @@ const AuthLayout = ({ children, svg, width, logo, name }: props) => (
                   <Image
                     src={logo}
                     alt="Logo"
-                    style={{ width: "100px", marginBottom: "10px" }}
+                    style={{ width: "150px", marginBottom: "10px" }}
                   />
                 )}
                 {name && <Title level={4}>{name}</Title>}

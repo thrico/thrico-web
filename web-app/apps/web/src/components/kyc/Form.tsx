@@ -41,7 +41,7 @@ const KycForm = () => {
   const [create, { data, loading }] = completeKyc({
     async onCompleted(data: any) {
       refetch();
-      return <Redirect to="/" />;
+      return <Redirect to="/profile" />;
     },
   });
   const [form] = Form.useForm();

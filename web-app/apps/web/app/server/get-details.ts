@@ -14,9 +14,21 @@ const query = gql`
       name
       favicon
       theme {
+        primaryColor
+        secondaryColor
+        backgroundColor
+        textColor
+        buttonColor
         borderRadius
-        colorBgContainer
-        colorPrimary
+        borderWidth
+        borderStyle
+        borderColor
+        inputBackground
+        inputBorderColor
+        fontSize
+        fontWeight
+        boxShadow
+        hoverEffect
       }
     }
   }
@@ -31,12 +43,12 @@ export const getData = cache(async () => {
     throw new Error("Authorization header not found");
   }
 
-  console.log(authorization);
   // Apollo Client query with error handling
   const { data, errors } = await getClient().query({
     query,
     variables: { domain: authorization },
   });
+  console.log(errors);
 
   if (!data?.checkDomain || errors) {
     throw new Error("Failed to fetch data");

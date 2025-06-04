@@ -2,10 +2,11 @@
 
 import type React from "react";
 import { useState } from "react";
-import { Form, Button, Select, Flex, Space, Card } from "antd";
+import { Form, Button, Select, Flex, Space, Card, Checkbox } from "antd";
 
 import { fetchCategories } from "@/lib/api";
 import { fetchSkillSuggestions } from "@/lib/skills";
+import AgreementDrawer from "./AgreementDrawer";
 
 interface SkillOption {
   value: string;
@@ -19,7 +20,9 @@ interface SkillFormProps {
   setCategories: (categories: string[]) => void;
   setCurrent: (step: number) => void;
   loading: boolean;
-  submit: () => void; // Added loading property
+  submit: () => void;
+  agreement: boolean;
+  setAgreement: (agreement: boolean) => void;
 }
 
 export const SkillForm: React.FC<SkillFormProps> = ({
@@ -30,22 +33,10 @@ export const SkillForm: React.FC<SkillFormProps> = ({
   setCurrent,
   loading,
   submit,
+  agreement,
+  setAgreement,
 }) => {
   const [form] = Form.useForm();
-  const [options, setOptions] = useState<SkillOption[]>([]);
-  const [skillOptions, setSkillOptions] = useState<SkillOption[]>([]);
-  const [loadingData, setLoading] = useState(false);
-
-  const onSearch = async (searchText: string) => {
-    try {
-      const suggestions = await fetchCategories(searchText);
-      setOptions(suggestions.map((skill) => ({ value: skill, label: skill })));
-    } catch (error) {
-      console.error("Error fetching suggestions:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const onFinish = async (values: any) => {
     await setSkills(values.skills);
@@ -74,7 +65,7 @@ export const SkillForm: React.FC<SkillFormProps> = ({
             mode="multiple"
             style={{ width: "100%" }}
             placeholder="Please Select Category"
-            onSearch={onSearch}
+            showSearch
             options={[
               { value: "sports", label: "Sports" },
               { value: "news", label: "News" },
@@ -199,6 +190,15 @@ export const SkillForm: React.FC<SkillFormProps> = ({
             ]}
           />
         </Form.Item>
+
+        <Form.Item name="agreement" valuePropName="checked">
+          <Checkbox
+            value={agreement}
+            onChange={(e) => setAgreement(e.target.checked)}
+          >
+            I have read and accept <AgreementDrawer />
+          </Checkbox>
+        </Form.Item>
       </Card>
       <Flex
         style={{ width: "100%", marginTop: 29 }}
@@ -208,7 +208,12 @@ export const SkillForm: React.FC<SkillFormProps> = ({
         <Space>
           <Button onClick={() => setCurrent(3)}>Previous</Button>
 
-          <Button loading={loading} type="primary" htmlType="submit">
+          <Button
+            disabled={!agreement}
+            loading={loading}
+            type="primary"
+            htmlType="submit"
+          >
             Submit
           </Button>
         </Space>

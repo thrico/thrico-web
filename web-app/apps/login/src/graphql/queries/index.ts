@@ -24,6 +24,7 @@ export const GET_USER = gql`
       lastName
       email
       isProfileCompleted
+      profile
     }
   }
 `;
@@ -66,6 +67,10 @@ export const CHECK_ORGANIZATION = gql`
         borderRadius
         colorPrimary
         colorBgContainer
+      }
+      settings {
+        allowNewUser
+        termAndConditionsMembers
       }
     }
   }

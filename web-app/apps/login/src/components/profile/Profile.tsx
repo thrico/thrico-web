@@ -7,44 +7,13 @@ import About from "./About/About";
 import { createProfile, useGetUser } from "../../graphql/actions";
 import Education from "./education/Education";
 import { GetUserType, ProfileStore } from "@/lib/types";
-import { create } from "zustand";
 
 import { SkillForm } from "./Interests";
-
-const useProfileStore = create<ProfileStore>((set) => ({
-  current: 0,
-  profile: {
-    country: "",
-    language: "",
-    phone: "",
-    timeZone: "",
-    fistName: "",
-    lastName: "",
-    email: "",
-    DOB: "",
-    currentPosition: "",
-    headline: "",
-    gender: "",
-    pronouns: "",
-    location: null,
-  },
-  about: {
-    social: [],
-  },
-  experience: [],
-  education: [],
-  skills: [],
-  categories: [],
-  setCurrent: (current) => set({ current }),
-  setProfile: (profile) => set({ profile }),
-  setAbout: (about) => set({ about }),
-  setExperience: (experience) => set({ experience }),
-  setEducation: (education) => set({ education }),
-  setSkills: (skills) => set({ skills }),
-  setCategories: (categories) => set({ categories }),
-}));
+import AgreementDrawer from "./AgreementDrawer";
+import { useProfileStore } from "@/store/profileStore";
 
 const Profile = ({ getUser }: { getUser: GetUserType }) => {
+  console.log(getUser);
   const {
     current,
     profile,
@@ -60,9 +29,25 @@ const Profile = ({ getUser }: { getUser: GetUserType }) => {
     setEducation,
     setSkills,
     setCategories,
+    agreement,
+    setAgreement,
   } = useProfileStore();
 
-  console.log(profile);
+  const [loadingProfile, setLoadingProfile] = React.useState(true);
+
+  React.useEffect(() => {
+    if (getUser?.profile) {
+      setProfile(getUser?.profile?.profile);
+      setAbout(getUser?.profile?.about || {});
+      setExperience(getUser?.profile?.experience || []);
+      setEducation(getUser?.profile?.education || []);
+      setSkills(getUser?.profile?.skills || []);
+      setCategories(getUser?.profile?.categories || []);
+      setLoadingProfile(false);
+    } else {
+      setLoadingProfile(false);
+    }
+  }, [getUser]);
 
   const [create, { loading }] = createProfile({
     async onCompleted() {
@@ -100,50 +85,54 @@ const Profile = ({ getUser }: { getUser: GetUserType }) => {
         ]}
       />
       <Flex style={{ width: "100%" }} justify="center" align="center">
-        <Flex vertical style={{ width: "100%" }}>
-          <Flex style={{ width: "100%", marginTop: "1rem" }}>
-            {current === 0 && (
-              <UserProfile
-                setProfile={setProfile}
-                profile={profile}
-                setCurrent={setCurrent}
-                getUser={getUser}
-              />
-            )}
-            {current === 1 && (
-              <Education
-                setEducation={setEducation}
-                education={education}
-                setCurrent={setCurrent}
-              />
-            )}
-            {current === 2 && (
-              <Experience
-                setExperience={setExperience}
-                experience={experience}
-                setCurrent={setCurrent}
-              />
-            )}
-            {current === 3 && (
-              <About
-                setAbout={setAbout}
-                social={about.social}
-                setCurrent={setCurrent}
-              />
-            )}
-            {current === 4 && (
-              <SkillForm
-                submit={submit}
-                loading={loading}
-                setCurrent={setCurrent}
-                setSkills={setSkills}
-                setCategories={setCategories}
-                categories={categories}
-                skills={skills}
-              />
-            )}
+        {!loadingProfile && (
+          <Flex vertical style={{ width: "100%" }}>
+            <Flex style={{ width: "100%", marginTop: "1rem" }}>
+              {current === 0 && (
+                <UserProfile
+                  setProfile={setProfile}
+                  profile={profile}
+                  setCurrent={setCurrent}
+                  getUser={getUser}
+                />
+              )}
+              {current === 1 && (
+                <Education
+                  setEducation={setEducation}
+                  education={education}
+                  setCurrent={setCurrent}
+                />
+              )}
+              {current === 2 && (
+                <Experience
+                  setExperience={setExperience}
+                  experience={experience}
+                  setCurrent={setCurrent}
+                />
+              )}
+              {current === 3 && (
+                <About
+                  setAbout={setAbout}
+                  social={about.social}
+                  setCurrent={setCurrent}
+                />
+              )}
+              {current === 4 && (
+                <SkillForm
+                  submit={submit}
+                  loading={loading}
+                  setCurrent={setCurrent}
+                  setSkills={setSkills}
+                  setCategories={setCategories}
+                  categories={categories}
+                  skills={skills}
+                  agreement={agreement}
+                  setAgreement={setAgreement}
+                />
+              )}
+            </Flex>
           </Flex>
-        </Flex>
+        )}
       </Flex>
     </>
   );
