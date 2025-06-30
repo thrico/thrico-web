@@ -16,7 +16,8 @@ export default async function RootLayout({
     // Fetch data and handle potential errors within RootLayout
     const data = await getData();
 
-    console.log(data);
+    console.log("Theme data:", data);
+
     return (
       <html lang="en">
         <ApolloWrapper>

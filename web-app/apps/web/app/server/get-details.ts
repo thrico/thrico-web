@@ -13,23 +13,23 @@ const query = gql`
       logo
       name
       favicon
-      theme {
-        primaryColor
-        secondaryColor
-        backgroundColor
-        textColor
-        buttonColor
-        borderRadius
-        borderWidth
-        borderStyle
-        borderColor
-        inputBackground
-        inputBorderColor
-        fontSize
-        fontWeight
-        boxShadow
-        hoverEffect
-      }
+      # theme {
+      #   primaryColor
+      #   secondaryColor
+      #   backgroundColor
+      #   textColor
+      #   buttonColor
+      #   borderRadius
+      #   borderWidth
+      #   borderStyle
+      #   borderColor
+      #   inputBackground
+      #   inputBorderColor
+      #   fontSize
+      #   fontWeight
+      #   boxShadow
+      #   hoverEffect
+      # }
     }
   }
 `;
@@ -48,7 +48,8 @@ export const getData = cache(async () => {
     query,
     variables: { domain: authorization },
   });
-  console.log(errors);
+
+  console.log(JSON.stringify(errors, null, 2));
 
   if (!data?.checkDomain || errors) {
     throw new Error("Failed to fetch data");
