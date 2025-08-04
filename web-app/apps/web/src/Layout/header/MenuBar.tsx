@@ -13,9 +13,7 @@ import { FaRegBell } from "react-icons/fa";
 import { MdChatBubbleOutline } from "react-icons/md";
 
 const MenuBar = () => {
-  const { data: notification } = unSeenNotification({
-    pollInterval: 5000,
-  });
+  const { data: notification } = unSeenNotification({});
   const [open, setOpen] = useState(false);
 
   const showDrawer = () => {

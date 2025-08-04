@@ -13,7 +13,6 @@ import AgreementDrawer from "./AgreementDrawer";
 import { useProfileStore } from "@/store/profileStore";
 
 const Profile = ({ getUser }: { getUser: GetUserType }) => {
-  console.log(getUser);
   const {
     current,
     profile,

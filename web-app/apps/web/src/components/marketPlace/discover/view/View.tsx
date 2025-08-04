@@ -37,12 +37,22 @@ const listings = [
     location: "Hyderabad, Telangana, India",
     image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
   },
+  {
+    id: 3,
+    title: "Realme Narzo N63 (8GB RAM) - 2 yrs old",
+    price: "₹10,999",
+    user: "Mohan",
+    time: "23 hours ago",
+    location: "Hyderabad, Telangana, India",
+    image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
+  },
   // Add more items here
 ];
 
 const ListingCard = ({ item }: { item: (typeof listings)[0] }) => (
   <Card
     hoverable
+    style={{ width: "100%" }}
     cover={
       <img
         alt={item.title}
@@ -51,10 +61,10 @@ const ListingCard = ({ item }: { item: (typeof listings)[0] }) => (
       />
     }
     actions={[
-      <Tooltip title="Add to wishlist">
+      <Tooltip key="wishlist" title="Add to wishlist">
         <HeartOutlined key="heart" />
       </Tooltip>,
-      <Tooltip title="More options">
+      <Tooltip key="options" title="More options">
         <EllipsisOutlined key="ellipsis" />
       </Tooltip>,
     ]}
@@ -86,7 +96,7 @@ const MarketplaceGrid = () => (
   <div style={{ padding: 24 }}>
     <Row gutter={[16, 16]}>
       {listings.map((item) => (
-        <Col xs={24} sm={12} md={8} lg={6} key={item.id}>
+        <Col key={item.id}>
           <ListingCard item={item} />
         </Col>
       ))}
